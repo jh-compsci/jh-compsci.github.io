@@ -46,8 +46,9 @@ body.index-page {
 
 .menu-bar .logo-text{
     color: #fff;
-    font-family: JetBrains Mono, Sans-Serif;
-	font-size: 18px;
+    font-family: "Noto Sans";
+	font-weight: bold;
+	font-size: 28px;
 }
 
 .menu-bar ul {
@@ -353,7 +354,7 @@ body.index-page {
 .faq-question {
 	background-color: #f9f9f9;
 	padding: 16px 20px;
-	font-size: 20px;
+	font-size: 22px;
 	font-weight: 600;
 	cursor: pointer;
 	display: flex;
@@ -364,7 +365,7 @@ body.index-page {
 
 /* Hover effect on the question */
 .faq-question:hover {
-  background-color: #eaeaea;
+	background-color: #eaeaea;
 }
 
 /* Style for the answer */
@@ -375,7 +376,7 @@ body.index-page {
   transition: max-height 0.3s ease-out;
   padding: 16px 20px 16px 20px;
   background-color: #eee;
-  font-size: 18px;
+  font-size: 20px !important;
   line-height: 1.5;
 }
 
@@ -416,8 +417,8 @@ figcaption {
 }
 
 .content-page p{
-	font-size: 20px;
-	color: #333;	
+	font-size: 22px;
+	color: #222;	
 }
 
 .blog-title {
