@@ -8,11 +8,10 @@ body {
 	padding: 0px;
 	box-sizing: border-box; /* Ensures padding is included in the total width */	
 	
-	font-family: "Noto Sans", sans-serif;
+	font-family: "Manrope", sans-serif;
 	font-optical-sizing: auto;
 	font-weight: 400;
-	font-style: normal;
-	font-variation-settings: "wdth" 100;	
+	font-style: normal;	
 }
 
 
@@ -34,8 +33,7 @@ body.index-page {
     top: 0;
     left: 0; /* Align to the left edge of the viewport */
     width: 100%; /* Full width of the viewport */
-    background-color: #333;
-    color: white;
+    background-color: #333;    
     z-index: 1005;
     height: 64px; /* Set a fixed height */
     display: flex; /* Use flexbox for alignment */
@@ -46,9 +44,8 @@ body.index-page {
 
 .menu-bar .logo-text{
     color: #fff;
-    font-family: "Noto Sans";
+	font-size: 1.5em;
 	font-weight: bold;
-	font-size: 28px;
 }
 
 .menu-bar ul {
@@ -69,8 +66,8 @@ body.index-page {
 
 .menu-bar a {
     text-decoration: none;
-    color: white;
-    font-size: 18px;
+    color: #ddd;
+    font-size: 1em;
     padding: 20px;
     transition: background-color 0.3s ease;
 }
@@ -171,7 +168,7 @@ body.index-page {
 }
 
 .footer-text {
-	font-size: 14px; /* Small text */
+	font-size: 1em; /* Small text */
 	color: #666; /* Subdued color */
 	margin: 0; /* Remove default margins */
 	padding: 0 20px; /* Add horizontal padding if needed */
@@ -217,7 +214,7 @@ body.index-page {
 }
 
 .index-page h1{
-    font-size: 96px;
+    font-size: 5.5em;
     padding-left: 10px;
 	padding-right: 10px;
 	padding-top: 100px;
@@ -230,7 +227,7 @@ body.index-page {
 
 .index-page .subtitle{
 	font-weight: normal;
-	font-size: 48px;
+	font-size: 2.5em;
 	color: #aaaaaa;
 	margin-top: 5px;
 	margin-bottom: 60px;	
@@ -239,7 +236,7 @@ body.index-page {
 
 .index-page h2{
 	font-weight: normal;
-	font-size: 48px;
+	font-size: 2.4em;
 	margin-top: 5px;
 	margin-bottom: 5px;	
 }
@@ -252,7 +249,7 @@ body.index-page {
     color: white;
     text-align: center;
     text-decoration: none;
-    font-size: 24px;
+    font-size: 1.3em;
     border: none;
     border-radius: 12px; /* Adjust for more/less rounding */
     cursor: pointer;
@@ -399,27 +396,53 @@ details[open] .faq-question::after {
 
 
 figure {
-  text-align: center; /* Centers the image and caption */
-  margin: 0 auto;     /* Centers the figure block */
-  max-width: 100%;    /* Ensures the figure doesn't overflow */
+	text-align: center; /* Centers the image and caption */
+	margin: 0 auto;     /* Centers the figure block */
+	max-width: 100%;    /* Ensures the figure doesn't overflow */
+	font-size: 0.75em;
+	color: #888;
 }
 
 img {
-  display: block;     /* Removes extra space below image */
-  margin: 0 auto;     /* Centers the image inside the figure */
-  max-width: 100%;
-  height: auto;
+	display: block;     /* Removes extra space below image */
+	margin: 0 auto;     /* Centers the image inside the figure */
+	max-width: 100%;
+	height: auto;
 }
 
 figcaption {
-  font-style: italic; /* Optional: for better styling */
-  margin-top: 10px;   /* Adds space between image and caption */
+	font-style: italic; /* Optional: for better styling */
+	margin-top: 10px;   /* Adds space between image and caption */
 }
 
-.content-page p{
-	font-size: 22px;
+.content-page .content p{
+	font-size: 1.2em;
 	color: #222;	
 }
+
+.content-page .content .date{
+	text-align: center;
+	font-size: 1em;
+	font-weight: bold;
+	color: #888;
+	padding: 20px 20px;
+}
+
+.content-page .content a{
+	color: #1a73e0;
+}
+
+.content-page .content h2{
+	font-size: 1.8em;
+	color: #1a73e0;
+	margin-top: 40px;
+}
+
+.content-page .content li{
+	font-size: 1.2em;
+	color: #222;
+}
+
 
 .blog-title {
     text-align: center;   /* Center alignment */
