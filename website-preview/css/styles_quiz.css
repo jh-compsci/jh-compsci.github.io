@@ -1,0 +1,384 @@
+/* styles_quiz.css */
+body {
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0 auto; /* Center the container horizontally */
+	background-color: #444444; /* Default background color for content pages */
+	padding: 0px;
+	box-sizing: border-box; /* Ensures padding is included in the total width */	
+			
+	
+	font-family: "Manrope", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 400;
+	font-style: normal;	
+
+}
+
+.container {
+	background-color: #dddddd; /* Default background color for content pages */	
+	margin: 0 auto;
+	
+	width: 100%;
+	max-width: 800px;
+	padding: 20px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.1);
+	border-radius: 8px;
+	text-align: center;
+	min-height: 500px;
+	position: relative;
+	
+	color: #222;
+}
+
+.button-container{
+	justify-content: space-between;
+	display: flex;
+}
+
+button {
+	margin-top: 1em;
+	margin-bottom: 0.5em;
+	padding: 0.4em 0.8em;
+	font-size: 1em;
+	cursor: pointer;
+	
+	background-color: #0099ff;
+	color: white;
+
+	border: 2px solid #007bff;
+	border-radius: 0.5em; /* Adjust for more/less rounding */
+	cursor: pointer;
+	transition: all 0.2s ease; /* Smooth hover effect */
+	
+	/* Optional: Add a slight shadow for depth */
+	/* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */  
+	
+	font-family: "Manrope", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 400;
+	font-style: normal;			
+}
+	
+.question-text span, li{
+	text-align: left;
+	font-size: 1.1em;
+}
+
+button:hover {
+	background-color: #0069d9;
+}
+
+button:disabled {
+	background-color: #ccc; /* gray background */
+	color: #666;              /* dark gray text */
+	cursor: default;
+	border: none;
+}
+
+.final-btn{
+	background-color: #28a745;		
+	border-color: #28a745;		
+}
+
+.final-btn:hover{
+	background-color: #218838;		
+}	
+
+.hidden {
+  display: none;
+}
+
+.options label {
+  cursor: pointer;
+}
+
+
+
+.option-label input {
+  margin-right: 10px;
+}
+
+.option-label span img {
+  vertical-align: middle;
+  margin-left: 5px;
+}	
+
+
+#progress-bar-container {
+  margin-top: 20px;
+  text-align: left;
+}
+
+#progress-bar {
+  width: 100%;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+#progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background-color: #007bff;
+  transition: width 0.3s ease;
+}	
+
+.option-container{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8em;
+  justify-content: space-evenly;
+}
+
+.option-box {
+  flex: 1 1 18%;
+  min-width: 170px;
+  max-width: 170px;
+  padding: 5px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+
+  transition: all 0.1s ease;
+  display: flex;	  
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #eee;
+  border-color: #888;
+  min-height: 60px;
+}
+
+/* hide the default option circle */
+.option-box input {
+	display: none;
+}
+
+.option-box span {
+  font-size: 1em;
+  padding: 5px;
+  color: #333;
+  width: 100%;
+  text-align: center;
+  border-radius: 6px;
+}
+
+/* When the input is checked, highlight the whole box */
+.option-box input:checked + span {
+ /* background-color: #f0f8ff; */
+ /* color: #007bff; */
+ /* border-radius: 6px; */
+}
+
+/* Styles for the entire container when radio is selected */	
+.option-box:has(input[type="radio"]:checked) {
+  border: 2px solid #007bff;
+  background-color: #f0f8ff;
+  font-weight: bold;
+}
+
+
+/* Optional: Highlight on hover */
+.option-box:hover {
+  border-color: #d5d5d5;
+}
+
+/* For responsiveness */
+@media (max-width: 768px) {
+  .option-box {
+	flex: 1 1 45%;
+  }
+}
+
+@media (max-width: 480px) {
+  .option-box {
+	flex: 1 1 100%;
+  }
+}
+
+
+
+/* image in the problem statement */
+.image-wrapper {
+  width: 100%;
+  text-align: center; /* Fallback for inline elements */
+}
+
+.image-wrapper img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+}
+
+/* select an option warning */
+.warning-bar {
+	border-color: #f5c6cb;
+	background-color: #f8d7da; /* Red color */
+	padding: 6px 12px; 
+	font-size: 1em;
+	font-weight: bold;
+	justify-content: space-between;
+	align-items: center;
+	border-radius: 8px; 	  
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	margin-top: 8px;
+	position: absolute;	/* overlay */		
+	/* center it */
+	width: 90%;		
+	top: 5%;
+	left: 50%;
+	opacity: 1;
+	transform: translate(-50%, -50%);
+	z-index: 1000; /* Make sure it's above other content */
+	animation: fadeOut 3s forwards;
+}
+	
+@keyframes fadeOut {
+	0% { opacity: 1; visibility: visible; }
+	90% { opacity: 1; visibility: visible; }
+	100% { opacity: 0; visibility: hidden; }
+}
+
+.warning-text {
+	text-align: left;
+	flex-grow: 1;
+}
+
+.close-btn {
+	background: none;
+	border: none;
+	font-size: 20px;
+	cursor: pointer;
+	color: black;
+	font-weight: bold;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+.close-btn:hover {
+	color: #888;
+	background: none;
+}
+
+
+.likelihood-container{
+	width: 50%;
+	min-width: 350px;
+	position: relative;
+	margin: 0 auto;
+	margin-top: 10px;
+	margin-bottom: 10px;		
+}
+
+.likelihood-bar-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0px auto;
+  font-family: Arial, sans-serif;
+  position: relative; /* Added for absolute positioning context */
+  padding-top: 10px; /* Added space for pointer top */
+  padding-bottom: 10px; /* Added space for pointer bottom */
+}
+
+.likelihood-bar {
+  height: 10px;
+  width: 100%;
+  background: #eee;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+}
+
+/* Pointer now positioned relative to container */
+.likelihood-pointer {
+  position: absolute;
+  top: 5px; 		/* Starts at top of container */
+  bottom: 5px; 	/* Extends to bottom of container */
+  left: 0%;			/* Default 0% for animation sliding to the right */
+  width: 3px;
+  background: #333;
+  transform: translateX(-50%);
+  transition: left 1.5s ease;
+  z-index: 10;
+}
+
+.bar-segment {
+  height: 100%;
+}
+
+.likelihood-bar .red {
+  background: #f23838;
+  width: 30%;
+}
+
+
+.likelihood-bar .yellow {
+  background: #e3ae08;
+  width: 40%;
+}
+
+.likelihood-bar .green {
+  background: #06b319;
+  width: 30%;
+}
+
+.likelihood-bar .greyout{
+  opacity: 0.4;
+  filter: grayscale(90%);
+}	
+
+
+.likelihood-value { 
+	font-weight: bold;
+	position: flex;
+	font-size: 1.5em;
+}
+
+.page-instructions span{	
+	display: flex; /* or block if needed */
+	text-align: left;
+	font-size: 1.2em;
+}
+
+
+.page-results span{	
+	display: flex; /* or block if needed */
+	text-align: left;
+	font-size: 1em;
+}
+
+.footer-text{
+	font-size: 0.6em;
+	color: #666;
+}
+
+.smallbar-container{
+
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.8em;
+	justify-content: space-evenly;
+
+}
+
+.smallbar-container .likelihood-container{
+	width: 35%;
+	min-width: 280px;
+}
+
+.smallbar-container .likelihood-value{
+	font-size: 1.2em;
+	font-weight: normal;
+}	
