@@ -16,9 +16,15 @@ body {
 
 
 body.index-page {
-	background-color: black !important; /* Overrides bgcolor for index page */
+	#background-color: black !important; /* Overrides bgcolor for index page */
 	color: white;
+	background: url('../images/homepage_background.jpg') no-repeat center center;
+	background-size: cover;           /* stretch to always cover the viewport */
+	background-attachment: fixed;     /* optional—keeps it fixed while scrolling */	
+	background-color: rgba(0, 0, 0, 0.7);   /* 0.45 = 45 % black overlay */
+	background-blend-mode: darken;           /* blends the color with the image */
 }
+
 
 .container {
     width: 70%; /* Base width for all child elements */
@@ -546,10 +552,6 @@ figcaption {
 		justify-content: space-between;
 	}
 	
-	.desktop-only{
-		display: none;
-	}
-	
 	.mobile-only{
 		display: block;
 	}
@@ -567,24 +569,34 @@ figcaption {
 		position: relative;
 		padding-top: 0.75em;
 		padding-bottom: 0.75em;		
+		
+
+		padding-top: 0;
+		padding-bottom: 0;
 	}
 	
-	.menu-bar a {
+	.menu-bar a, span {
 		text-decoration: none;
 		color: #ddd;
 		font-size: 1em;
 		padding-left: 1em;
-		padding-right: 1em;
+		padding-right: 1em;		
 		padding-top: 0.75em;
 		padding-bottom: 0.75em;
+			
+		display: block; /* so it spans whole row */		
 	}	
+	
+	.menu-bar .language-bar  {
+		display: flex; /* so it does not split into multiple row */		
+	}		
 	
 	.menu-bar .submenu {
 		display: none;
 	}
 
 	.menu-bar  .has-submenu.toggled .submenu {
-	  display: block;
+		display: block;
 	}	
 
 	/* Opened arrow */
@@ -627,7 +639,11 @@ figcaption {
 	.menu-bar .submenu {
 		width: 100%;
 	}
-			
+	
+	.menu-bar .submenu li a{
+		padding-top: 0.75em;
+		padding-bottom: 0.75em;
+	}
 		
 	.index-page .button{
 		font-size: 1em;
@@ -642,5 +658,8 @@ figcaption {
 		font-size: 0.6em;
 	}
 	
-
+	.desktop-only{
+		display: none;
+	}
+	
 }
