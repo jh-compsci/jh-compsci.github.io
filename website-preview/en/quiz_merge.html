@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Gifted Quotient Test</title>
+  
+	<link rel="stylesheet" href="..\css\styles_quiz.css">  
+  
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Manrope&display=swap" rel="stylesheet">	
+		
+  
+  <style>
+		#color-grid-main-container {			
+			place-items: center;
+			border: 2px solid #222;
+			border-radius: 15px;
+		}
+
+        .color-grid-container {
+            display: grid;
+            gap: 2px;
+            margin-bottom: 20px;
+            background-color: #ddd;
+            border: 2px solid #ddd;
+			width: 100%; 		/* Full width of container */			
+			max-width: var(--grid-max-width, 100%); 	/* Dynamic Maximum width of the grid */
+        }
+
+        .grid-cell {
+            aspect-ratio: 1;
+            cursor: pointer;
+        }
+
+        .color-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #222;
+            cursor: pointer;
+			border-radius: 40px;
+        }
+
+		.color-option:hover{		
+            border: 2px solid #888;   			
+		}
+
+		.selected-color {
+			position: relative;
+			transition: transform 0.0s ease;
+			z-index: 1;
+			border: 2px solid #007bff;
+		}
+
+		.selected-color::after {
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 35px;
+			height: 35px;
+			background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23aaaaaa"><path d="M20.71,4.63L19.37,3.29C19,2.9 18.35,2.9 17.96,3.29L9,12.25L11.75,15L20.71,6.04C21.1,5.65 21.1,5 20.71,4.63M7,14C5.34,14 4,15.34 4,17C4,18.31 2.84,19 2,19C2.92,20.22 4.5,21 6,21C8.21,21 10,19.21 10,17C10,15.34 8.66,14 7,14Z"/></svg>');
+			background-size: contain;
+			background-repeat: no-repeat;
+			pointer-events: none;
+		}
+   
+  </style>
+</head>
+<body class = "content-page">
+
+	<div class="container">
+
+		<!-- Display warning if proceed without choice -->		
+		<div class="warning-bar" id="proceed-warning" style="display: none;">
+			Complete the question to proceed.
+			<button class="close-btn" onclick="closeProceedWarning()">×</button>
+		</div>
+
+		<!-- Instruction Page -->
+		<div id="page-instructions" class = "page-instructions">
+			<h1>Gifted Quotient Test Demo</h1>
+
+			<span>The test is designed to be completed without any additional tools.
+			On average, it takes about 15 minutes to finish.
+			For the most accurate results, avoid retaking the test.</span></br>
+			
+			<span>You will answer 10 questions.
+			 Select the correct choice for each one.</span>		
+			</span></br>
+			<button onclick="showPage('page-quiz')">Start</button>
+		</div>
+
+		<!-- Quiz Page -->
+		<div id="page-quiz" class = "hidden">
+		
+			<!-- MC questions & options -->
+			<div id="question-container">
+				<div><div id="question-text" class="question-text"></div></div>
+				<div class="image-wrapper">
+					<img id="question-image" style="display:none; " />
+				</div>
+
+				<form id="quiz-form" class="options">
+					<div id="option-container" class="option-container"></div>
+				</form>
+			</div>
+			
+			<!-- Color Grid Questions -->
+			<div id = "color-grid-main-container">
+				<h4>Click on the cell to change color</h4>
+				<div class="color-grid-container"></div>
+				<h4>Choose brush color:</h4>
+				<div class="color-options"></div>
+			</div>
+
+
+			<!-- Buttons -->
+			<div class = "button-container">
+				<button onclick="prevQuestion()" id="prev-button">← Back</button>
+				<button onclick="nextQuestion()" style="display: none;" id="next-button">Next →</button>
+				<button id="submit-button" onclick="confirmShowResults()" class="final-btn">Show Result</button>
+			</div>
+			
+			<!-- Progress Bar -->
+			<div id="progress-bar-container">
+				<small id="progress-text">Question x of y</small>
+				<div id="progress-bar">
+				  <div id="progress-bar-fill"></div>
+				</div>
+			</div>
+			
+		</div>
+
+		<!-- Results Page -->
+		<div id="page-results" class="page-results hidden">
+			<h1>Test Completed.</h1>
+			<h2 id="score-display"></h2>
+			<!-- <button onclick="restartQuiz()">Restart Quiz</button> -->
+			
+			<div class = "smallbar-container">
+			
+
+				<div class = "likelihood-container" id = "vs-reasoning-bar">
+					<span>Visual and Spatial Reasoning</span>
+					<div class="likelihood-value" id="likelihood-value"></div>
+					<div class="likelihood-bar-container">
+					  <div class="likelihood-bar">
+						<div class="bar-segment red greyout"></div>
+						<div class="bar-segment yellow greyout"></div>
+						<div class="bar-segment green greyout"></div>
+					  </div>
+					  <div class="likelihood-pointer" id="likelihood-pointer"></div>
+					</div>
+				</div>
+
+
+				<div class = "likelihood-container" id = "la-reasoning-bar">
+					<span>Logical and Abstract Reasoning</span>
+					<div class="likelihood-value" id="likelihood-value"></div>
+					<div class="likelihood-bar-container">
+					  <div class="likelihood-bar">
+						<div class="bar-segment red greyout"></div>
+						<div class="bar-segment yellow greyout"></div>
+						<div class="bar-segment green greyout"></div>
+					  </div>
+					  <div class="likelihood-pointer" id="likelihood-pointer"></div>
+					</div>
+				</div>			
+				
+				<div class = "likelihood-container" id = "math-bar">
+					<span>Mathematical</span>
+					<div class="likelihood-value" id="likelihood-value"></div>
+					<div class="likelihood-bar-container">
+					  <div class="likelihood-bar">
+						<div class="bar-segment red greyout"></div>
+						<div class="bar-segment yellow greyout"></div>
+						<div class="bar-segment green greyout"></div>
+					  </div>
+					  <div class="likelihood-pointer" id="likelihood-pointer"></div>
+					</div>
+				</div>
+
+
+				<div class = "likelihood-container" id = "ling-bar">
+					<span>Verbal and Linguistic</span>
+					<div class="likelihood-value" id="likelihood-value"></div>
+					<div class="likelihood-bar-container">
+					  <div class="likelihood-bar">
+						<div class="bar-segment red greyout"></div>
+						<div class="bar-segment yellow greyout"></div>
+						<div class="bar-segment green greyout"></div>
+					  </div>
+					  <div class="likelihood-pointer" id="likelihood-pointer"></div>
+					</div>
+				</div>	
+
+			</div>
+
+
+			<div class = "likelihood-container" id = "gifted-bar">
+				<span><b>Chance of being gifted:</b></span>
+				<div class="likelihood-value" id="likelihood-value"></div>
+				<div class="likelihood-bar-container">
+				  <div class="likelihood-bar">
+					<div class="bar-segment red greyout"></div>
+					<div class="bar-segment yellow greyout"></div>
+					<div class="bar-segment green greyout"></div>
+				  </div>
+				  <div class="likelihood-pointer" id="likelihood-pointer"></div>
+				</div>
+			</div>
+			
+			
+			<span>The results of this preliminary test are for reference only and should not be considered a final assessment of giftedness.
+			For a more detailed evaluation, including a comprehensive analysis and personalized report,
+			we invite you to schedule a visit with our experts.</span>
+		</div>
+
+		<!-- footer -->		
+
+		<footer class="footer" style="margin-top: 30px;">
+			<div class="footer-text">
+				&copy; 2025 OptBeacon Consultancy Limited. All rights reserved.
+			</div>
+		</footer>
+	</div>
+
+
+<script>
+	const questions = [
+	  // Question with images in options
+	  {
+		question: "<h2>There is exaclty one person lying. Who is the liar?</h2><ul>\
+					<li>Alice: Diana is lying.</li><li>Bob: Charlie is not lying</li>\
+					<li>Charlie: I am not lying.<li>Diana: Bob is lying.</li></ul>",
+		type: "MC",
+		options: [
+		  { text: "Alice" },
+		  { text: "Bob" },
+		  { text: "Charlie" },
+		  { text: "Diana" },		  
+		],
+		answer: 3
+	  },
+	  {
+		question: "<h2>Grid Test</h2>",
+		type: "Grid",
+		image: "../images/edu_sustain.jpg",		
+		questionData:{
+			rows: 5,
+			cols: 6,
+			colors: ["#000000", "#FFFFFF", "#FF0000", "#0088CC"],
+		},
+	  },
+	  {
+		question: "<h2>Grid Test</h2>",
+		type: "Grid",
+		questionData:{
+			rows: 3,
+			cols: 4,
+			colors: ["#000000", "#FF0000", "#0088CC"],
+		},
+	  },	
+	
+	  // Question without images
+	  {
+		question: "<h2>Wheel is to a car as fin is to a ____?</h2>",
+		type: "MC",
+		options: [
+		  { text: "boat" },
+		  { text: "fish" },
+		  { text: "plane" },
+		  { text: "train" },
+		  { text: "ship" },
+		  { text: "bird" },
+		  { text: "rocket" },
+		  { text: "bicycle" },		  
+		],
+		answer: 1
+	  },
+
+	  // Question with images in options
+	  {
+		question: "<h2>Which of these is a cat?</h2>",
+		type: "MC",
+		image: "../images/edu_sustain.jpg",
+		options: [
+		  { image: "../images/quiz/kitten.jpg " },
+		  { image: "../images/quiz/kitten.jpg" },
+		  { image: "../images/quiz/transparent.png " },
+		  { image: "../images/quiz/transparent.png" },	
+		],
+		answer: 0
+	  },
+
+	];
+
+	let currentQuestionIndex = 0;
+	let userAnswers = [];
+
+	function showPage(pageId) {
+		document.querySelectorAll("div[id^='page']").forEach(div => div.classList.add("hidden"));
+		document.getElementById(pageId).classList.remove("hidden");
+	}
+
+	function loadQuestion() {
+		const q = questions[currentQuestionIndex];
+
+		// Set question text
+		document.getElementById("question-text").innerHTML = q.question;
+	  
+	  
+		// Update progress text
+		const progressText = document.getElementById("progress-text");
+		progressText.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+
+		// Update progress bar
+		const progressBarFill = document.getElementById("progress-bar-fill");
+		const progressPercent = ((currentQuestionIndex + 1) / questions.length) * 100;
+		progressBarFill.style.width = progressPercent + "%";
+			  
+		// show next button or finish button
+	  
+		const submitBtn = document.getElementById("submit-button");
+		if (currentQuestionIndex === questions.length - 1) {
+			submitBtn.style.display = "block";
+		}
+		else {
+			submitBtn.style.display = "none";
+		}	  
+
+		const nextBtn = document.getElementById("next-button");
+		if (currentQuestionIndex < questions.length - 1) {
+			nextBtn.style.display = "block";
+		}
+		else {
+			nextBtn.style.display = "none";
+		}				
+		
+		const prevBtn = document.getElementById("prev-button");
+		if (currentQuestionIndex > 0) {
+			prevBtn.style.display = "block";
+			prevBtn.disabled  = false;
+		}
+		else {
+			prevBtn.style.display = "block";
+			prevBtn.disabled  = true;
+		}		
+
+		// Set question image if exists
+		const questionImg = document.getElementById("question-image");
+		if (q.image) {
+			questionImg.src = q.image;
+			questionImg.style.display = "block";
+		}
+		else {
+			questionImg.style.display = "none";
+		}
+
+		// Clear previous options
+		const container = document.getElementById("option-container");
+		container.innerHTML = "";
+
+		// hide color grid
+		document.getElementById("color-grid-main-container").classList.add('hidden');
+		
+		// Render options with optional images
+		if (q.type == "MC"){	  
+			q.options.forEach((opt, index) => {
+				const label = document.createElement("label");
+				label.className = "option-box";
+				const radio = document.createElement("input");
+				radio.type = "radio";
+				radio.name = "option";
+				radio.value = index;
+
+				// Pre-select if already answered
+				if (userAnswers[currentQuestionIndex] === index) {
+					radio.checked = true;
+				}
+
+				// Option text
+				const span = document.createElement("span");
+				span.textContent = opt.text;
+
+				// Option image (if any)
+				if (opt.image) {
+					  const img = document.createElement("img");
+					  img.src = opt.image;
+					  img.alt = "Option image";		  
+					  img.style.verticalAlign = "middle";
+					  img.style.height = "80px";
+					  span.appendChild(img);
+				}
+
+				label.appendChild(radio);
+				label.appendChild(span);
+				container.appendChild(label);
+		  });
+		}
+		else if (q.type == "Grid"){
+			document.getElementById("color-grid-main-container").classList.remove('hidden');
+			currentGridQuestion = new ColorGridQuestion('color-grid-main-container', q.questionData, userAnswers[currentQuestionIndex]);			
+		}
+	}
+
+	function displayProceedWarning(){
+		const alertmsg = document.getElementById("proceed-warning");
+		alertmsg.style.display = "flex";
+
+		alertmsg.style.animation = 'none';
+		alertmsg.offsetHeight; 		// Trigger reflow (forces CSS reset)
+		alertmsg.style.animation = 'fadeOut 3s forwards';	  	  
+		return;
+	}
+
+	// free memory and clean up the color grid html
+	// also save user Answer
+	function destroyGrid(){
+		if (typeof currentGridQuestion !== 'undefined' && currentGridQuestion != null){
+			// save answer
+			userAnswers[currentQuestionIndex] = currentGridQuestion.userAnswer;
+		
+			// free memory
+			currentGridQuestion.destroy();
+			currentGridQuestion = null;			
+			const container = document.getElementById("color-grid-main-container");
+			container.querySelector('.color-grid-container').innerHTML = "";
+			container.querySelector('.color-options').innerHTML = "";			
+		}	
+	}
+
+	function nextQuestion() {
+		destroyGrid();
+
+		const selected = document.querySelector('input[name="option"]:checked');
+		if (!selected && !userAnswers[currentQuestionIndex]) {
+			displayProceedWarning();
+			return;
+		}
+		else{
+			const alertmsg = document.getElementById("proceed-warning");
+			alertmsg.style.display = "none";	 
+		}
+
+		if (selected) {
+			userAnswers[currentQuestionIndex] = parseInt(selected.value);
+		}
+
+		if (currentQuestionIndex < questions.length - 1) {
+			currentQuestionIndex++;
+			loadQuestion();
+		} 
+		else {		
+			showResults();
+		}
+	}
+	
+
+
+	function prevQuestion() {		
+		destroyGrid();		
+		
+		if (currentQuestionIndex > 0) {
+			// clear any alert msg
+			document.getElementById("proceed-warning").style.display = "none";	 	
+			currentQuestionIndex--;
+			loadQuestion();
+		}
+	}
+
+	function confirmShowResults() {
+		destroyGrid();
+		const selected = document.querySelector('input[name="option"]:checked');
+				
+		if (!selected && !userAnswers[currentQuestionIndex]) {		  
+			displayProceedWarning();
+			return;
+		}	
+		
+		if (selected) {
+			userAnswers[currentQuestionIndex] = parseInt(selected.value);
+		}		
+		
+		showResults();
+	}
+
+	// set result Bar
+	function setLikelihood(percentage, elementID) {
+	  // Validate input
+	  percentage = Math.max(0, Math.min(100, percentage));
+	  
+	  const container = document.getElementById(elementID);	  
+	  
+	  // Position the pointer
+	  const pointer = container.querySelector('.likelihood-pointer');
+	  pointer.style.left = `${percentage}%`;
+	  
+	  // Update the displayed value
+	  const valueDisplay = container.querySelector('.likelihood-value');
+	  valueDisplay.textContent = `${Math.round(percentage)}%`;
+
+		const redbar = container.querySelector('.red');
+		const yellowbar = container.querySelector('.yellow');
+		const greenbar = container.querySelector('.green');
+		
+
+		if (percentage <= 30){
+			redbar.classList.remove('greyout');
+			valueDisplay.style.color = '#f23838';
+			//pointer.style.background = '#cf0a0a';
+			
+		}
+		else if (percentage <= 70){
+			yellowbar.classList.remove('greyout');
+			valueDisplay.style.color = '#e3ae08';
+			//pointer.style.background = '#ffdc6f';
+		}
+		else{
+			greenbar.classList.remove('greyout');
+			valueDisplay.style.color = '#06b319';
+			//pointer.style.background = '#6ff8a8';
+		}	  
+	}
+
+	function showResults() {
+		// clear any alert msg
+		closeProceedWarning();	 
+  
+		let score = 0;
+		for (let i = 0; i < questions.length; i++) {
+			if (userAnswers[i] === questions[i].answer) {
+				score++;
+			}		
+		}
+
+		document.getElementById("score-display").textContent = ''//`You scored ${score} out of ${questions.length}.`;
+		showPage('page-results');
+		
+		// add a slight delay for the animation 
+		setTimeout(() => {
+			setLikelihood(score*100/questions.length, 'vs-reasoning-bar');
+			setLikelihood(40, 'ling-bar');
+			setLikelihood(75, 'la-reasoning-bar');
+			setLikelihood(60, 'math-bar');
+			setLikelihood(99, 'gifted-bar');
+		}, 5);
+
+	}
+
+	function restartQuiz() {
+		currentQuestionIndex = 0;
+		userAnswers = [];
+		loadQuestion();
+		showPage('page-quiz');
+	}
+	
+
+
+	// Initialize on load
+	window.onload = () => {
+		loadQuestion();
+	};
+ 
+    function closeProceedWarning() {
+		document.getElementById("proceed-warning").style.display = "none";
+    } 
+	
+	// close window confirmation
+	window.addEventListener('beforeunload', function (e) {
+		// Some browsers require you to set returnValue
+		e.preventDefault();          // modern spec
+		e.returnValue = '';          // legacy
+		return '';                   // legacy
+	});	
+	
+	
+	// start of color grid class
+	class ColorGridQuestion {
+		constructor(containerId, questionData, initAnswer) {
+			this.container = document.getElementById(containerId);
+			this.questionData = questionData;
+			this.currentColorIndex = 0;
+			this.userAnswer = '';
+			this.init(initAnswer);
+		}
+
+		init(initAnswer) {
+			// Create color options
+			const colorOptionsContainer = this.container.querySelector('.color-options');
+			this.questionData.colors.forEach((color, index) => {
+				const colorOption = document.createElement('div');
+				colorOption.className = 'color-option';
+				colorOption.style.backgroundColor = color;
+				colorOption.dataset.index = index;
+				colorOption.addEventListener('click', () => this.selectColor(index));
+				colorOptionsContainer.appendChild(colorOption);
+			});
+
+			// Create grid
+			const gridContainer = this.container.querySelector('.color-grid-container');
+			gridContainer.style.gridTemplateColumns = `repeat(${this.questionData.cols}, 1fr)`;
+			gridContainer.style.gridTemplateRows = `repeat(${this.questionData.rows}, 1fr)`;
+			gridContainer.style.setProperty('--grid-max-width', `min(500px, ${this.questionData.cols * 50}px)`);
+
+			// Initialize grid cells
+			this.gridCells = [];
+			for (let i = 0; i < this.questionData.rows; i++) {
+				for (let j = 0; j < this.questionData.cols; j++) {
+					const cell = document.createElement('div');
+					cell.className = 'grid-cell';
+					
+					// default color
+					cell.style.backgroundColor = this.questionData.colors[0];
+					cell.dataset.colorIndex = '0';
+					
+					// if answered before
+					if (initAnswer !== undefined){
+						let selectedColor = initAnswer[i*this.questionData.cols + j];
+						cell.style.backgroundColor = this.questionData.colors[selectedColor];
+						cell.dataset.colorIndex = selectedColor;
+					}
+					
+					cell.dataset.row = i;
+					cell.dataset.col = j;
+
+					cell.addEventListener('click', () => this.changeCellColor(cell));
+					gridContainer.appendChild(cell);
+					this.gridCells.push(cell);
+				}
+			}
+
+			// Select first color by default
+			this.selectColor(0);
+			
+			// init useAnswer
+			this.updateUserAnswer();
+		}
+
+		selectColor(index) {
+			this.currentColorIndex = index;
+			const colorOptions = this.container.querySelectorAll('.color-option');
+			colorOptions.forEach(option => option.classList.remove('selected-color'));
+			colorOptions[index].classList.add('selected-color');
+		}
+
+		changeCellColor(cell) {
+			// let nextIndex = (parseInt(cell.dataset.colorIndex) + 1) % this.questionData.colors.length;
+			
+			let nextIndex = this.currentColorIndex;
+			cell.dataset.colorIndex = nextIndex;
+			cell.style.backgroundColor = this.questionData.colors[nextIndex];
+			this.updateUserAnswer();
+		}
+
+		updateUserAnswer() {
+			let answer = '';
+			this.gridCells.forEach(cell => {
+				answer += cell.dataset.colorIndex;
+			});
+			this.userAnswer = answer;
+		}
+
+		checkAnswer() {
+			const feedback = this.container.querySelector('.feedback');
+			feedback.classList.remove('correct', 'incorrect');
+			
+			if (this.userAnswer === this.questionData.answer) {
+				feedback.textContent = 'Correct! Well done.';
+				feedback.classList.add('correct');
+			} else {
+				feedback.textContent = 'Incorrect. Please try again.' + this.userAnswer;
+				feedback.classList.add('incorrect');
+			}
+		}
+
+		getUserAnswer() {
+			return this.userAnswer;
+		}
+		
+	   // Destructor method to clean up memory and event listeners
+		destroy() {
+			// Remove event listeners from color options
+			const colorOptions = this.container.querySelectorAll('.color-option');
+			colorOptions.forEach((option, index) => {
+				option.removeEventListener('click', () => this.selectColor(index));
+			});
+
+			// Remove event listeners from grid cells
+			this.gridCells.forEach(cell => {
+				// We need to remove the specific event listener
+				// Since we used an arrow function, we can't easily remove it
+				// So we'll clone and replace the element to remove all listeners
+				const newCell = cell.cloneNode(true);
+				cell.parentNode.replaceChild(newCell, cell);
+			});
+
+			// Clear references to DOM elements and data
+			this.container = null;
+			this.questionData = null;
+			this.gridCells = null;
+			this.currentColorIndex = null;
+			this.userAnswer = null;
+		}			
+	}
+	// end of color grid class
+</script>
+
+</body>
+</html>
