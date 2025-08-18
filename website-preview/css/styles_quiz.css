@@ -292,53 +292,70 @@ button:disabled {
 }
 
 .likelihood-bar {
-  height: 10px;
+  height: 5px;
   width: 100%;
   background: #eee;
   border-radius: 15px;
   position: relative;
-  overflow: hidden;
   display: flex;
 }
 
 /* Pointer now positioned relative to container */
 .likelihood-pointer {
-  position: absolute;
-  top: 5px; 		/* Starts at top of container */
-  bottom: 5px; 	/* Extends to bottom of container */
-  left: 0%;			/* Default 0% for animation sliding to the right */
-  width: 3px;
-  background: #333;
-  transform: translateX(-50%);
-  transition: left 1.5s ease;
-  z-index: 10;
+	  position: absolute;
+	  top: 5px; 		/* Starts at top of container */
+	  bottom: 5px; 	/* Extends to bottom of container */
+	  left: 0%;			/* Default 0% for animation sliding to the right */
+	  width: 3px;
+	  background: #333;
+	  transform: translateX(-50%);
+	  transition: left 1.5s ease;
+	  z-index: 10;
 }
 
-.bar-segment {
-  height: 100%;
+.likelihood-bar .bar-segment {
+	height: 100%;
 }
 
 .likelihood-bar .red {
-  background: #f23838;
-  width: 30%;
+	background: #f23838;
+	width: 30%;
+		/* glow effect */
+	box-shadow: 
+		0 -3px 6px 1px rgba(255, 102, 102, 0.5),
+		0 3px 6px 1px rgba(255, 102, 102, 0.5);
+	position: relative; 
+	z-index: 1; 
 }
 
 
 .likelihood-bar .yellow {
-  background: #e3ae08;
-  width: 40%;
+	background: #e3ae08;
+	width: 40%;
+	/* glow effect */
+	box-shadow: 
+		0 -3px 6px 1px rgba(255, 255, 0, 0.5),
+		0 3px 6px 1px rgba(255, 255, 0, 0.5);
+	position: relative; 
+	z-index: 1; 
 }
 
 .likelihood-bar .green {
-  background: #06b319;
-  width: 30%;
+	background: #06b319;
+	width: 30%;
+		/* glow effect */
+	box-shadow: 
+		0 -3px 6px 1px rgba(68, 255, 68, 0.5),
+		0 3px 6px 1px rgba(68, 255, 68, 0.5);
+	position: relative; 
+	z-index: 1; 
 }
 
 .likelihood-bar .greyout{
-  opacity: 0.4;
-  filter: grayscale(90%);
+	opacity: 0.4;
+	filter: grayscale(90%);
+	box-shadow: none !important;
 }	
-
 
 .likelihood-value { 
 	font-weight: bold;
