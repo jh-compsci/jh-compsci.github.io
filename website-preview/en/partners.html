@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gifted Quotient Test</title>
+    <link rel="stylesheet" href="..\css\styles.css">
+	
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Manrope&display=swap" rel="stylesheet">	
+		
+ 
+	<style>
+	/* Picture on left, text on right */
+	.left-image-right-text {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+	}
+
+	.left-image-right-text .image-container {
+		flex: 1;
+	}
+
+	.left-image-right-text .text-container {
+		flex: 1;
+	}
+
+	/* Text on left, picture on right */
+	.left-text-right-image {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+	}
+
+	.left-text-right-image .text-container {
+		flex: 1;
+	}
+
+	.left-text-right-image .image-container {
+		flex: 1;
+	}
+
+	/* Responsive behavior */
+	.image-container img {
+		max-width: 100%;
+		height: auto;
+	}
+
+	.text-container {
+		padding: 10px 0;
+	}
+	</style>
+</head>
+
+<body class = "content-page">
+
+	<div class="container">	
+		<!-- Menu Bar -->
+		<nav class="menu-bar">
+			<ul>
+				<!--
+				<div class="logo">
+					<img src="..\images\logo.png" alt="Logo">
+				</div>  -->
+				
+				<div class = "logo-text desktop-only">
+					Gifted Quotient Test
+				</div>
+			</ul>
+			<ul class="nav-links">
+				<li><a href="index.html">Home</a></li>
+				<li class = "has-submenu">
+					<span>Discover</span>
+					<ul class="submenu">
+						<li><a href="about_us.html">Our works</a></li>						
+						<li><a href="about_mi.html">Multiple Intelligence</a></li>						
+					</ul>				
+				</li>
+				<li><a href="assesment.html">Assesment</a></li>
+				<li><a href="partners.html">Partners</a></li>
+				<li><a href="education.html">Education</a></li>
+				<li><a href="faq.html">FAQ</a></li>
+				<li><a href="contact.html">Contact</a></li>
+				
+				<li class = "mobile-only language-bar">
+					<a href="../zh-hk/index.html" >繁</a>
+					<a href="../zh-cn/index.html" >简</a>
+					<a href="../en/index.html"    >EN</a>
+				</li>
+				
+			</ul>
+			<ul>
+				<li class = "desktop-only"><a href="../zh-hk/index.html">繁</a></li>
+				<li class = "desktop-only"><a href="../zh-cn/index.html">简</a></li>
+				<li class = "desktop-only"><a href="../en/index.html">EN</a></li>
+			</ul>
+			
+			<!-- toggle button for mobile -->
+			<div class="menu-toggle mobile-only" id="menu-toggle">☰</div>
+		</nav>	
+	
+		<!-- Content -->
+		<div class = "content">	
+
+			<div class="centered-container">
+				<h1>Our Partners</h1>
+			</div>
+			
+			<!-- Picture on left, text on right -->
+			<div class="left-image-right-text">
+				<div class="image-container">
+					<img src="../images/partners/STEM.jpg" width="450">
+				</div>
+				<div class="text-container">
+					<h2>CocoRobo</h2>
+					<p>We parntered with CocoRobo to create and delivered an engaging, hands-on AI and mathematical modelling workshop series specially designed for primary school students. Through interactive games, storytelling, colorful visual tools, and simple coding activities, the students explored basic concepts such as patterns, logic, probability, and how computers can “learn” from examples. The course sparked curiosity and confidence in STEM subjects, with many students enthusiastically applying what they learned to their own creative projects, helping lay a strong foundation for future learning and inspiring the next generation of problem solvers.</p>
+				</div>
+			</div>
+
+			<!-- Text on left, picture on right -->
+			<div class="left-text-right-image">
+				<div class="text-container">
+					<h2>Tung Wah College</h2>
+					<p>We developed an advanced simulation and optimization platform to improve elevator scheduling and energy efficiency for their campus building. By applying sophisticated mathematical modeling, we optimized traffic flow patterns and reduced average wait times by over 28% in peak time. This project not only elevated their user experience but also contributed to their sustainability goals through measurable reductions in energy consumption across deployed installations.</p>
+				</div>
+				<div class="image-container">
+					<img src="../images/partners/tw.png">
+				</div>
+			</div>
+			
+			<!-- Picture on left, text on right -->
+			<div class="left-image-right-text">
+				<div class="image-container">
+					<img src="../images/partners/musjoy.jpg" width="350">
+				</div>
+				<div class="text-container">
+					<h2>Macau Fly Co. and Musjoy Co.</h2>
+					<p>We partnered with Macau Fly Co. and Musjoy Co. to modernize their software systems. Our team conducted a comprehensive audit and implemented a scalable, cloud-native architecture using modern frameworks and microservices. The result was an improvement in system performance, significantly reduced maintenance costs, and enhanced reliability that supported their rapid expansion into new markets.</p>
+				</div>
+			</div>
+					
+		<!-- footer -->		
+		<footer class="footer">
+			<div class="footer-divider"></div> 
+			<div class="footer-text">
+				&copy; 2026 OptBeacon Consultancy Limited. All rights reserved.
+			</div>
+		</footer>			
+		
+	</div>
+	
+    <script src="../script/script.js"></script>	
+</body>
+</html>
