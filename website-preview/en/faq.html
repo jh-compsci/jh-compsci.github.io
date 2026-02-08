@@ -18,44 +18,8 @@
 
 	<div class="container">	
 		<!-- Menu Bar -->
-		<nav class="menu-bar">
-			<ul>
-				<!--
-				<div class="logo">
-					<img src="..\images\logo.png" alt="Logo">
-				</div>  -->
-				
-				<div class = "logo-text desktop-only">
-					Gifted Quotient Test
-				</div>
-			</ul>
-			<ul class="nav-links">
-				<li><a href="index.html">Home</a></li>
-				<li class = "has-submenu">
-					<span>Discover</span>
-					<ul class="submenu">
-						<li><a href="about_us.html">Our works</a></li>						
-						<li><a href="about_mi.html">Multiple Intelligence</a></li>						
-					</ul>				
-				</li>
-				<li><a href="#">Assesment</a></li>
-				<li><a href="partners.html">Partners</a></li>
-				<li><a href="education.html">Education</a></li>
-				<li><a href="faq.html">FAQ</a></li>
-				<li><a href="contact.html">Contact</a></li>
-				
-				<li class = "mobile-only"><a href="../zh-hk/index.html">繁</a><a href="../zh-cn/index.html">简</a><a href="../en/index.html">EN</a></li>
-				
-			</ul>
-			<ul>
-				<li class = "desktop-only"><a href="../zh-hk/index.html">繁</a></li>
-				<li class = "desktop-only"><a href="../zh-cn/index.html">简</a></li>
-				<li class = "desktop-only"><a href="../en/index.html">EN</a></li>
-			</ul>
-			
-			<!-- toggle button for mobile -->
-			<div class="menu-toggle mobile-only" id="menu-toggle">☰</div>
-		</nav>	
+		<div id = "menu-container">
+		</div>
 	
 		<!-- Content -->
 		<div class = "content">	
@@ -64,21 +28,35 @@
 			  <p class="faq-answer">Here are some typical characteristics: Superior learning process, Motivation to learn and learning style,
 							Learning outcomes, Relations with peers, Self-perception and affective aspects and Uneven rates of development.</p>
 			</details>
+			
+			<details class="faq-item">
+			  <summary class="faq-question">Is giftedness inherited?</summary>
+			  <p class="faq-answer">Giftedness has a strong genetic component, but environment plays a critical role. While innate potential is present from birth, it must be nurtured through stimulation, encouragement, access to resources, and emotional support. Without appropriate challenge and affirmation, gifted potential may not be fully realized.</p>
+			</details>		
 
+			<details class="faq-item">
+			  <summary class="faq-question">Isn’t AI just for future engineers? Is it too advanced for my child?</summary>
+			  <p class="faq-answer">Not really! AI is already part of everyday life: like how Netflix recommends shows, how your phone unlocks with your face, or how smart thermostats save energy. Understanding how it works helps your child become a thoughtful, confident user, not just someone who gets told what to do by technology.</p>
+			</details>		
+			
+			<details class="faq-item">
+			  <summary class="faq-question">What does “mathematical modeling” even mean?</summary>
+			  <p class="faq-answer">Mathematical modeling is about creating a mathematical representation of a real-world scenario in order to make a prediction, optimize the cost, or improve decision-making.</p>
+			</details>					
 
-		</div>
-	
-		<!-- footer -->		
-		<footer class="footer">
-			<div class="footer-divider"></div> 
-			<div class = "centered-container">
-				<img src = "../images/optbeacon_logo.png" width="150px" title = "OptBeacon Consultancy Limited" >
-				<img src = "../images/nv_inception.webp" width = "120px" title = "Partner of NVIDIA Inception Program">
-			</div>
-			<div class="footer-text">
-				&copy; 2026 OptBeacon Consultancy Limited. All rights reserved.
-			</div>
-		</footer>					
+			<!-- footer -->		
+			<footer class="footer">
+				<div class="footer-divider"></div> 
+				<div class = "centered-container">
+					<img src = "../images/optbeacon_logo.png" width="150px" title = "OptBeacon Consultancy Limited" >
+					<img src = "../images/nv_inception.webp" width = "120px" title = "Partner of NVIDIA Inception Program">
+				</div>
+				<div class="footer-text">
+					&copy; 2026 OptBeacon Consultancy Limited. All rights reserved.
+				</div>
+			</footer>		
+
+		</div>	
 		
 	</div>
 	
